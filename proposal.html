@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中京ルーフ｜ショート動画広告 提案書</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e85d04;
+    --light: #f4f7fb;
+    --border: #d0dce8;
+    --text: #1e2a35;
+    --muted: #6b7c93;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: var(--light); color: var(--text); }
+
+  /* ヘッダー */
+  .cover {
+    background: linear-gradient(135deg, var(--primary) 60%, #2c5f8a);
+    color: #fff;
+    padding: 60px 48px 48px;
+  }
+  .cover-label { font-size: 13px; letter-spacing: 0.12em; opacity: 0.7; margin-bottom: 12px; }
+  .cover-title { font-size: 32px; font-weight: 800; line-height: 1.3; margin-bottom: 8px; }
+  .cover-sub { font-size: 16px; opacity: 0.85; margin-bottom: 32px; }
+  .cover-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+  .cover-meta-item { font-size: 13px; opacity: 0.8; }
+  .cover-meta-item span { display: block; font-size: 15px; font-weight: 700; opacity: 1; margin-top: 2px; }
+
+  /* コンテンツ */
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* セクションタイトル */
+  .section-title {
+    font-size: 13px; letter-spacing: 0.1em; color: var(--accent);
+    font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .section-heading { font-size: 22px; font-weight: 800; margin-bottom: 24px; color: var(--primary); }
+
+  /* 概要ボックス */
+  .summary-box {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 28px 32px; margin-bottom: 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .summary-item-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .summary-item-value { font-size: 17px; font-weight: 700; color: var(--primary); }
+
+  /* パターンカード */
+  .pattern-grid { display: flex; flex-direction: column; gap: 40px; }
+  .pattern-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .card-header {
+    background: var(--primary); color: #fff;
+    padding: 18px 28px; display: flex; align-items: center; gap: 16px;
+  }
+  .card-number {
+    background: var(--accent); color: #fff;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.05em;
+    padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .card-header-title { font-size: 18px; font-weight: 800; }
+  .card-header-type { font-size: 12px; opacity: 0.75; margin-left: auto; white-space: nowrap; }
+
+  .card-body { padding: 28px; display: grid; grid-template-columns: 200px 1fr; gap: 28px; }
+  @media (max-width: 680px) { .card-body { grid-template-columns: 1fr; } }
+
+  /* 絵コンテエリア */
+  .storyboard-slot {
+    background: #f0f4f8; border: 2px solid var(--border); border-radius: 10px;
+    aspect-ratio: 9/16; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+    color: var(--muted); font-size: 12px; text-align: center; padding: 0;
+    position: relative; overflow: hidden;
+  }
+  .storyboard-slot img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px; }
+  .storyboard-icon { font-size: 28px; }
+  .storyboard-label { font-size: 11px; line-height: 1.5; }
+
+  /* 詳細グリッド */
+  .detail-grid { display: flex; flex-direction: column; gap: 16px; }
+  .detail-row { display: grid; grid-template-columns: 100px 1fr; gap: 8px; align-items: start; }
+  .detail-key {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    background: #fff4f0; border-radius: 4px; padding: 4px 8px;
+    text-align: center; line-height: 1.4; white-space: nowrap;
+  }
+  .detail-val { font-size: 14px; line-height: 1.7; color: var(--text); padding-top: 3px; }
+  .detail-val strong { color: var(--primary); }
+
+  /* 台本エリア */
+  .script-area {
+    margin-top: 16px; background: #f7f9fc;
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+  }
+  .script-area-title { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 10px; letter-spacing: 0.08em; }
+  .script-line { display: grid; grid-template-columns: 70px 1fr; gap: 8px; margin-bottom: 6px; font-size: 13px; }
+  .script-time { color: var(--accent); font-weight: 700; font-size: 12px; padding-top: 1px; }
+  .script-text { line-height: 1.6; }
+
+  /* 記入欄 */
+  .input-section {
+    margin-top: 16px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .input-section-title {
+    background: #f0f4f8; padding: 10px 16px; font-size: 12px;
+    font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--border);
+  }
+  .input-fields { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .input-row { display: flex; flex-direction: column; gap: 4px; }
+  .input-label { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .input-field {
+    border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px;
+    font-size: 14px; font-family: inherit; width: 100%; resize: vertical;
+    color: var(--text); background: #fff;
+    transition: border-color 0.2s;
+  }
+  .input-field:focus { outline: none; border-color: var(--primary); }
+  .input-field::placeholder { color: #bcc9d6; }
+
+  /* 優先度バッジ */
+  .priority { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 8px; }
+  .priority-high { background: #fff0ed; color: var(--accent); }
+  .priority-mid { background: #edf4ff; color: #2c72c7; }
+  .priority-low { background: #f0f7ef; color: #3a8a34; }
+
+  /* スケジュール */
+  .schedule-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 14px; }
+  .schedule-table th { background: var(--primary); color: #fff; padding: 12px 16px; text-align: left; font-weight: 700; }
+  .schedule-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* フッター */
+  .footer { text-align: center; margin-top: 64px; font-size: 12px; color: var(--muted); }
+
+  /* 印刷 */
+  @media print {
+    body { background: #fff; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .pattern-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- カバー -->
+<div class="cover">
+  <div class="cover-label">PROPOSAL / ショート動画広告 企画提案書</div>
+  <div class="cover-title">中京ルーフ<br>ショート動画広告 7パターン提案</div>
+  <div class="cover-sub">雨漏り・屋根工事・緊急対応を軸にした訴求設計</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">提出日<span>2026年4月26日</span></div>
+    <div class="cover-meta-item">提案先<span>中京ルーフ 様</span></div>
+    <div class="cover-meta-item">撮影想定<span>2026年5月中旬〜下旬</span></div>
+    <div class="cover-meta-item">納品想定<span>2026年6月</span></div>
+    <div class="cover-meta-item">制作本数<span>7パターン</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 概要 -->
+  <div class="section-title">OVERVIEW</div>
+  <div class="section-heading">提案概要</div>
+  <div class="summary-box">
+    <div>
+      <div class="summary-item-label">ターゲット</div>
+      <div class="summary-item-value">築15〜30年の住宅オーナー<br><small style="font-size:13px;font-weight:400;color:var(--muted)">50〜70代 ＋ 子世代(30〜40代)</small></div>
+    </div>
+    <div>
+      <div class="summary-item-label">配信媒体（想定）</div>
+      <div class="summary-item-value">Instagram / TikTok<br><small style="font-size:13px;font-weight:400;color:var(--muted)">YouTube Shorts も可</small></div>
+    </div>
+    <div>
+      <div class="summary-item-label">動画尺</div>
+      <div class="summary-item-value">15〜45秒<br><small style="font-size:13px;font-weight:400;color:var(--muted)">縦型 9:16 フォーマット</small></div>
+    </div>
+  </div>
+
+  <!-- パターン一覧 -->
+  <div class="section-title">PATTERNS</div>
+  <div class="section-heading">7パターン詳細</div>
+  <div class="pattern-grid">
+
+    <!-- パターン01 -->
+    <div class="pattern-card">
+      <div class="card-header">
+        <div class="card-number">PATTERN 01</div>
+        <div class="card-header-title">雨漏りリスク喚起型<span class="priority priority-high">最優先</span></div>
+        <div class="card-header-type">恐怖訴求 / 認知獲得</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_01.png" alt="絵コンテ01 雨漏りリスク喚起型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">「その屋根、大丈夫？」放置するとどうなるかを可視化して不安を喚起</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">15〜30秒</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「天井に染みが…もう手遅れかもしれません」</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「まずは無料診断から」→ プロフリンク</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">撮影素材</div>
+            <div class="detail-val">雨音SE・天井の染み・屋根のひび割れアップ・職人による診断シーン</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜3秒</div><div class="script-text">【SE：雨音】天井から水が垂れる映像</div></div>
+            <div class="script-line"><div class="script-time">3〜8秒</div><div class="script-text">テロップ「天井に染みが…それ、放置してませんか？」</div></div>
+            <div class="script-line"><div class="script-time">8〜18秒</div><div class="script-text">屋根のひび割れ・剥がれた漆喰をアップで見せる</div></div>
+            <div class="script-line"><div class="script-time">18〜25秒</div><div class="script-text">職人「屋根の劣化は、外から見えないことが多い」</div></div>
+            <div class="script-line"><div class="script-time">25〜30秒</div><div class="script-text">「中京ルーフ　無料屋根診断 受付中」CTA表示</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">クライアントOK / 修正点</div>
+                <textarea class="input-field" rows="2" placeholder="例：冒頭の台詞をもう少しやわらかくしたい　など"></textarea>
+              </div>
+              <div class="input-row">
+                <div class="input-label">撮影場所・手配メモ</div>
+                <textarea class="input-field" rows="2" placeholder="例：自社の施工現場を借りる　など"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パターン02 -->
+    <div class="pattern-card">
+      <div class="card-header">
+        <div class="card-number">PATTERN 02</div>
+        <div class="card-header-title">職人直営・適正価格型<span class="priority priority-high">最優先</span></div>
+        <div class="card-header-type">差別化訴求 / 比較検討層</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_02.png" alt="絵コンテ02 職人直営・適正価格型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">中間業者なし＝適正価格。「騙されたくない」不安に直接応える</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">30秒</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「その見積もり、◯割が中間マージンかもしれません」</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「自社職人が直接見積もり。今すぐ相談」</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">撮影素材</div>
+            <div class="detail-val">職人が直接施工する様子・見積書を出すシーン・会社の外観</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜5秒</div><div class="script-text">テロップ「屋根工事、どこに頼んでいいか分からない…」</div></div>
+            <div class="script-line"><div class="script-time">5〜12秒</div><div class="script-text">「実は見積もりの◯割が中間マージンのことも」</div></div>
+            <div class="script-line"><div class="script-time">12〜22秒</div><div class="script-text">自社職人が屋根で作業→「私たちは職人が直接施工します」</div></div>
+            <div class="script-line"><div class="script-time">22〜30秒</div><div class="script-text">「だから無駄な費用なし。中京ルーフ　無料相談受付中」</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">クライアントOK / 修正点</div>
+                <textarea class="input-field" rows="2" placeholder=""></textarea>
+              </div>
+              <div class="input-row">
+                <div class="input-label">撮影場所・手配メモ</div>
+                <textarea class="input-field" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パターン03 -->
+    <div class="pattern-card">
+      <div class="card-header">
+        <div class="card-number">PATTERN 03</div>
+        <div class="card-header-title">資格・信頼構築型<span class="priority priority-mid">準優先</span></div>
+        <div class="card-header-type">権威性訴求 / 検討層</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_03.png" alt="絵コンテ03 資格・信頼構築型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">「瓦屋根診断技士」保有の権威性を前面に。「ちゃんとした人に頼みたい」層へ</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">30〜45秒</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「屋根の診断、誰でもできるわけじゃない」</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「最難関資格保有の職人が、あなたの屋根を診ます」</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">撮影素材</div>
+            <div class="detail-val">資格証・職人のポートレート・丁寧な診断シーン・お客様との会話</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜5秒</div><div class="script-text">資格証のクローズアップ「瓦屋根診断技士」テロップ</div></div>
+            <div class="script-line"><div class="script-time">5〜15秒</div><div class="script-text">職人「この資格、全国でも取得者は限られています」</div></div>
+            <div class="script-line"><div class="script-time">15〜30秒</div><div class="script-text">丁寧に屋根を調べる様子・お客様に説明するシーン</div></div>
+            <div class="script-line"><div class="script-time">30〜45秒</div><div class="script-text">「知多半島で◯◯件。中京ルーフに無料でご相談を」</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">施工件数（正確な数字を確認）</div>
+                <input type="text" class="input-field" placeholder="例：累計500件　など">
+              </div>
+              <div class="input-row">
+                <div class="input-label">クライアントOK / 修正点</div>
+                <textarea class="input-field" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パターン04 -->
+    <div class="pattern-card">
+      <div class="card-header">
+        <div class="card-number">PATTERN 04</div>
+        <div class="card-header-title">ビフォーアフター比較型<span class="priority priority-mid">準優先</span></div>
+        <div class="card-header-type">施工品質訴求 / 視覚的インパクト</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_04.png" alt="絵コンテ04 ビフォーアフター比較型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">施工前後の劇的な変化を見せることで「こんなにきれいになる」期待感を演出</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">20〜30秒</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「この屋根、施工前だと思いますか？」</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「無料診断→見積もり→工事まで一貫対応」</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">撮影素材</div>
+            <div class="detail-val">過去施工のBefore写真（許可取得）＋After写真・動画。ドローン撮影があると◎</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜3秒</div><div class="script-text">美しい仕上がりの屋根を映す（Afterから始めるフェイク演出）</div></div>
+            <div class="script-line"><div class="script-time">3〜8秒</div><div class="script-text">「実は…この1ヶ月前はこんな状態でした」→Before画像</div></div>
+            <div class="script-line"><div class="script-time">8〜20秒</div><div class="script-text">Before→After をリズムよく複数事例で見せる</div></div>
+            <div class="script-line"><div class="script-time">20〜30秒</div><div class="script-text">「中京ルーフ　施工実績多数。まずは無料相談から」</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">使用可能なBefore/After写真の有無・数</div>
+                <textarea class="input-field" rows="2" placeholder="例：過去施工の写真◯件分あり、お客様許可取得済み　など"></textarea>
+              </div>
+              <div class="input-row">
+                <div class="input-label">ドローン撮影の可否</div>
+                <input type="text" class="input-field" placeholder="可 / 不可 / 要確認">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パターン05 -->
+    <div class="pattern-card">
+      <div class="card-header">
+        <div class="card-number">PATTERN 05</div>
+        <div class="card-header-title">台風前・事前対策型<span class="priority priority-mid">季節連動</span></div>
+        <div class="card-header-type">季節訴求 / 緊急性</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_05.png" alt="絵コンテ05 台風前・緊急事前訴求型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">台風シーズン前（6〜9月）に「今のうちに点検を」と背中を押す季節訴求</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">20〜30秒</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「今年の台風、あなたの屋根は大丈夫ですか？」</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「台風前に無料点検。今すぐ予約を」（期間限定感）</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">配信タイミング</div>
+            <div class="detail-val">6月〜8月（梅雨・台風シーズン直前に集中配信）</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜5秒</div><div class="script-text">台風ニュース映像風テロップ「今年も台風シーズンが来る」</div></div>
+            <div class="script-line"><div class="script-time">5〜15秒</div><div class="script-text">「台風後の緊急修理は…費用が倍以上になることも」</div></div>
+            <div class="script-line"><div class="script-time">15〜25秒</div><div class="script-text">「今のうちに無料点検で、台風に備えましょう」</div></div>
+            <div class="script-line"><div class="script-time">25〜30秒</div><div class="script-text">「中京ルーフ　台風前無料点検キャンペーン実施中」</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">キャンペーン期間・条件</div>
+                <input type="text" class="input-field" placeholder="例：6月1日〜8月31日　先着20件　など">
+              </div>
+              <div class="input-row">
+                <div class="input-label">クライアントOK / 修正点</div>
+                <textarea class="input-field" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パターン06 -->
+    <div class="pattern-card">
+      <div class="card-header">
+        <div class="card-number">PATTERN 06</div>
+        <div class="card-header-title">お客様の声・信頼型<span class="priority priority-low">サポート</span></div>
+        <div class="card-header-type">社会的証明 / 検討→決断層</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_06.png" alt="絵コンテ06 お客様の声・信頼型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">実際のお客様の声で「ここに頼んで良かった」という安心感を醸成</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">30〜45秒</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「正直、最初は不安でした」（お客様の声で始める）</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「地元知多半島で◯◯件の信頼。まずはご相談を」</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">撮影素材</div>
+            <div class="detail-val">協力いただけるお客様へのインタビュー動画（1〜2名）＋自宅前での撮影</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜8秒</div><div class="script-text">お客様「最初はどこに頼むか不安でしたが…」</div></div>
+            <div class="script-line"><div class="script-time">8〜20秒</div><div class="script-text">「説明が丁寧で、無理な勧誘もなかった。安心しました」</div></div>
+            <div class="script-line"><div class="script-time">20〜35秒</div><div class="script-text">きれいになった屋根をバックに笑顔のお客様</div></div>
+            <div class="script-line"><div class="script-time">35〜45秒</div><div class="script-text">「中京ルーフ　地元密着・10年保証」</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">協力いただけるお客様候補（有無・人数）</div>
+                <textarea class="input-field" rows="2" placeholder="例：2〜3名に打診予定　など"></textarea>
+              </div>
+              <div class="input-row">
+                <div class="input-label">クライアントOK / 修正点</div>
+                <textarea class="input-field" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パターン07 -->
+    <div class="pattern-card">
+      <div class="card-header" style="background: #7b1e1e;">
+        <div class="card-number" style="background: #c0392b;">PATTERN 07</div>
+        <div class="card-header-title">台風・大雨後の緊急対応型<span class="priority" style="background:#fff3f3;color:#c0392b;">緊急配信用</span></div>
+        <div class="card-header-type">緊急訴求 / 即日反応層</div>
+      </div>
+      <div class="card-body">
+        <div class="storyboard-slot">
+          <img src="storyboard_07.png" alt="絵コンテ07 台風・大雨後の緊急対応型">
+        </div>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <div class="detail-key">訴求軸</div>
+            <div class="detail-val">台風・大雨直後にすぐ配信できる「緊急対応バージョン」。リアルタイム性が命</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">想定尺</div>
+            <div class="detail-val">15〜20秒（短く即効性重視）</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">冒頭フック</div>
+            <div class="detail-val"><strong>「台風が通過しました。屋根の被害、確認しましたか？」</strong></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">CTA</div>
+            <div class="detail-val">「今すぐ無料で応急点検します。お電話ください」</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">配信タイミング</div>
+            <div class="detail-val"><strong style="color:#c0392b;">台風・大雨の翌日〜3日以内に即日配信</strong>（事前に素材と広告セットを準備しておく）</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-key">撮影素材</div>
+            <div class="detail-val">台風後の損傷屋根（ストック素材でも可）・職人が急行するシーン・電話対応シーン</div>
+          </div>
+          <div class="script-area">
+            <div class="script-area-title">▼ 台本（案）</div>
+            <div class="script-line"><div class="script-time">0〜4秒</div><div class="script-text">テロップ「台風通過後。屋根の被害が急増しています」</div></div>
+            <div class="script-line"><div class="script-time">4〜10秒</div><div class="script-text">損傷した屋根・ずれた瓦・剥がれた板金の映像</div></div>
+            <div class="script-line"><div class="script-time">10〜16秒</div><div class="script-text">「中京ルーフ　緊急点検受付中。お電話1本で伺います」</div></div>
+            <div class="script-line"><div class="script-time">16〜20秒</div><div class="script-text">電話番号大きく表示・「今すぐ電話する」ボタン誘導</div></div>
+          </div>
+          <div class="input-section">
+            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
+            <div class="input-fields">
+              <div class="input-row">
+                <div class="input-label">緊急対応の受付体制（営業時間・対応エリア）</div>
+                <textarea class="input-field" rows="2" placeholder="例：年中無休・知多半島全域対応　など"></textarea>
+              </div>
+              <div class="input-row">
+                <div class="input-label">緊急時の問い合わせ先（電話番号）</div>
+                <input type="text" class="input-field" placeholder="例：0562-XX-XXXX">
+              </div>
+              <div class="input-row">
+                <div class="input-label">事前に準備する広告セット・運用ルール</div>
+                <textarea class="input-field" rows="2" placeholder="例：台風警報発令翌日に自動配信OKかどうか　など"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pattern-grid -->
+
+  <!-- スケジュール -->
+  <div style="margin-top: 64px;">
+    <div class="section-title">SCHEDULE</div>
+    <div class="section-heading">制作スケジュール（案）</div>
+    <table class="schedule-table">
+      <tr>
+        <th>フェーズ</th>
+        <th>時期</th>
+        <th>内容</th>
+        <th>担当</th>
+      </tr>
+      <tr>
+        <td>企画確定</td>
+        <td>4月末〜5月上旬</td>
+        <td>パターン選定・台本最終確認・撮影リスト確定</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>素材準備</td>
+        <td>5月上旬〜中旬</td>
+        <td>ロケ地手配・出演者調整・機材手配</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>撮影</td>
+        <td>5月中旬〜下旬</td>
+        <td>各パターンの撮影（1〜2日想定）</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>編集・初稿</td>
+        <td>5月末〜6月上旬</td>
+        <td>テロップ・BGM・SE・CTA挿入</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>修正対応</td>
+        <td>6月中旬</td>
+        <td>クライアント確認→修正（1〜2回）</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>納品</td>
+        <td>6月下旬</td>
+        <td>全パターン納品・広告入稿データ引き渡し</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 見積もり -->
+  <div style="margin-top: 64px;">
+    <div class="section-title">ESTIMATE</div>
+    <div class="section-heading">制作費用見積もり（税別）</div>
+    <table class="schedule-table">
+      <tr>
+        <th style="width:40%">項目</th>
+        <th style="width:15%;text-align:right">単価</th>
+        <th style="width:10%;text-align:center">数量</th>
+        <th style="width:15%;text-align:right">小計</th>
+        <th>備考</th>
+      </tr>
+      <tr>
+        <td>企画構成</td>
+        <td style="text-align:right">¥50,000</td>
+        <td style="text-align:center">1式</td>
+        <td style="text-align:right;font-weight:700">¥50,000</td>
+        <td>全7パターン構成・台本作成含む</td>
+      </tr>
+      <tr>
+        <td>撮影（アシスタント込み）</td>
+        <td style="text-align:right">¥75,000</td>
+        <td style="text-align:center">1日</td>
+        <td style="text-align:right;font-weight:700">¥75,000</td>
+        <td>機材・交通費別途</td>
+      </tr>
+      <tr>
+        <td>ショート動画 台本・編集</td>
+        <td style="text-align:right">¥30,000</td>
+        <td style="text-align:center">7本</td>
+        <td style="text-align:right;font-weight:700">¥210,000</td>
+        <td>テロップ・BGM・CTA・SE含む</td>
+      </tr>
+      <tr>
+        <td>WEB広告 初期設定</td>
+        <td style="text-align:right">¥35,000</td>
+        <td style="text-align:center">1式</td>
+        <td style="text-align:right;font-weight:700">¥35,000</td>
+        <td>Instagram／Meta広告アカウント設定・入稿</td>
+      </tr>
+      <tr style="background:#1a3a5c;color:#fff;">
+        <td colspan="3" style="font-weight:800;font-size:16px;padding:16px 16px;">合計（税別）</td>
+        <td style="text-align:right;font-weight:800;font-size:18px;color:#f0c040;">¥370,000</td>
+        <td style="color:rgba(255,255,255,0.7);font-size:13px;">税込 ¥407,000</td>
+      </tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;">※ 撮影機材費・ロケ交通費・お客様インタビュー謝礼等は別途実費精算。広告配信費は含みません。</p>
+  </div>
+
+  <!-- 広告費想定 -->
+  <div style="margin-top: 56px;">
+    <div class="section-title">AD BUDGET</div>
+    <div class="section-heading">広告費想定・リーチ・CV試算</div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:20px;">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">
+        対象媒体：<strong>Instagram / Meta広告</strong>（知多半島エリア・住宅オーナー40〜70代ターゲティング）
+      </div>
+      <table class="schedule-table" style="margin-top:0;">
+        <tr>
+          <th>月間広告予算</th>
+          <th style="text-align:right">広告の表示回数<br><span style="font-weight:400;font-size:11px;">何人に届くか</span></th>
+          <th style="text-align:right">プロフ・サイトへの<br>流入数</th>
+          <th style="text-align:right">月間問い合わせ<br>見込み件数</th>
+          <th style="text-align:right">問い合わせ1件<br>あたりの費用</th>
+        </tr>
+        <tr>
+          <td><strong>¥30,000／月</strong><br><span style="font-size:12px;color:var(--muted)">スタートプラン</span></td>
+          <td style="text-align:right">40,000〜60,000回</td>
+          <td style="text-align:right">400〜700件</td>
+          <td style="text-align:right"><strong>3〜6件</strong></td>
+          <td style="text-align:right">¥5,000〜10,000</td>
+        </tr>
+        <tr>
+          <td><strong>¥50,000／月</strong><br><span style="font-size:12px;color:var(--muted)">推奨プラン</span></td>
+          <td style="text-align:right">70,000〜100,000回</td>
+          <td style="text-align:right">700〜1,200件</td>
+          <td style="text-align:right"><strong>5〜10件</strong></td>
+          <td style="text-align:right">¥5,000〜10,000</td>
+        </tr>
+        <tr>
+          <td><strong>¥100,000／月</strong><br><span style="font-size:12px;color:var(--muted)">強化プラン</span></td>
+          <td style="text-align:right">140,000〜200,000回</td>
+          <td style="text-align:right">1,400〜2,500件</td>
+          <td style="text-align:right"><strong>10〜18件</strong></td>
+          <td style="text-align:right">¥5,500〜10,000</td>
+        </tr>
+        <tr style="background:#f0f7ff;">
+          <td colspan="5" style="font-size:12px;color:var(--muted);padding:12px 16px;">
+            ※ 屋根リフォームは検討期間が長い商材のため、初月から問い合わせが安定するまで2〜3ヶ月かかるのが一般的です。台風・大雨直後の緊急配信時は問い合わせ数が通常の1.5〜2倍程度になる傾向があります。
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;">
+      <div style="background:#fff4ed;border:1px solid #f5c4a8;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:12px;color:var(--accent);font-weight:700;margin-bottom:6px;">「問い合わせ」とは</div>
+        <div style="font-size:13px;line-height:1.7;">LINE・電話・フォームからの<strong>無料診断申込</strong>を1件としてカウント。問い合わせから実際の工事受注につながる割合は業界平均で<strong>20〜40%</strong>程度です。</div>
+      </div>
+      <div style="background:#edf4ff;border:1px solid #a8c8f5;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:12px;color:#2c72c7;font-weight:700;margin-bottom:6px;">台風・大雨直後の緊急配信</div>
+        <div style="font-size:13px;line-height:1.7;">災害後は「屋根が心配」という方が急増します。事前に動画を準備しておき<strong>翌日には配信開始</strong>できる体制を作っておくことが重要です。</div>
+      </div>
+      <div style="background:#f0faf0;border:1px solid #a8d8a8;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:12px;color:#3a8a34;font-weight:700;margin-bottom:6px;">推奨スタート構成</div>
+        <div style="font-size:13px;line-height:1.7;">初月は<strong>¥50,000</strong>で01・02・07パターンを配信。2ヶ月目以降に反応を見て予算増・パターン追加の判断を。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    WEB企画事務所 FREE　｜　wpof0901@gmail.com
+  </div>
+
+</div>
+</body>
+</html>
