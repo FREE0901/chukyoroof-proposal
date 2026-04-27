@@ -56,18 +56,30 @@
   }
   .card-header {
     background: var(--primary); color: #fff;
-    padding: 18px 28px; display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
   }
   .card-number {
     background: var(--accent); color: #fff;
-    font-size: 12px; font-weight: 800; letter-spacing: 0.05em;
-    padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.05em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
   }
-  .card-header-title { font-size: 18px; font-weight: 800; }
-  .card-header-type { font-size: 12px; opacity: 0.75; margin-left: auto; white-space: nowrap; }
+  .card-header-title { font-size: 16px; font-weight: 800; flex: 1; min-width: 120px; }
+  .card-header-type { font-size: 11px; opacity: 0.75; white-space: nowrap; width: 100%; padding-left: 0; }
 
-  .card-body { padding: 28px; display: grid; grid-template-columns: 200px 1fr; gap: 28px; }
-  @media (max-width: 680px) { .card-body { grid-template-columns: 1fr; } }
+  .card-body { padding: 20px; display: grid; grid-template-columns: 160px 1fr; gap: 20px; }
+  @media (max-width: 600px) {
+    .card-body { grid-template-columns: 1fr; }
+    .storyboard-slot { max-width: 200px; margin: 0 auto; }
+    .cover { padding: 40px 20px 32px; }
+    .cover-title { font-size: 24px; }
+    .cover-meta { gap: 16px; }
+    .container { padding: 32px 16px 60px; }
+    .section-heading { font-size: 18px; }
+    .summary-box { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
+    .detail-key { white-space: normal; font-size: 10px; }
+    .detail-row { grid-template-columns: 80px 1fr; }
+    .schedule-table th, .schedule-table td { padding: 10px 10px; font-size: 12px; }
+  }
 
   /* 絵コンテエリア */
   .storyboard-slot {
@@ -103,25 +115,6 @@
   .script-time { color: var(--accent); font-weight: 700; font-size: 12px; padding-top: 1px; }
   .script-text { line-height: 1.6; }
 
-  /* 記入欄 */
-  .input-section {
-    margin-top: 16px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
-  }
-  .input-section-title {
-    background: #f0f4f8; padding: 10px 16px; font-size: 12px;
-    font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--border);
-  }
-  .input-fields { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-  .input-row { display: flex; flex-direction: column; gap: 4px; }
-  .input-label { font-size: 12px; color: var(--muted); font-weight: 600; }
-  .input-field {
-    border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px;
-    font-size: 14px; font-family: inherit; width: 100%; resize: vertical;
-    color: var(--text); background: #fff;
-    transition: border-color 0.2s;
-  }
-  .input-field:focus { outline: none; border-color: var(--primary); }
-  .input-field::placeholder { color: #bcc9d6; }
 
   /* 優先度バッジ */
   .priority { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 8px; }
@@ -229,19 +222,6 @@
             <div class="script-line"><div class="script-time">18〜25秒</div><div class="script-text">職人「屋根の劣化は、外から見えないことが多い」</div></div>
             <div class="script-line"><div class="script-time">25〜30秒</div><div class="script-text">「中京ルーフ　無料屋根診断 受付中」CTA表示</div></div>
           </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">クライアントOK / 修正点</div>
-                <textarea class="input-field" rows="2" placeholder="例：冒頭の台詞をもう少しやわらかくしたい　など"></textarea>
-              </div>
-              <div class="input-row">
-                <div class="input-label">撮影場所・手配メモ</div>
-                <textarea class="input-field" rows="2" placeholder="例：自社の施工現場を借りる　など"></textarea>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -284,19 +264,6 @@
             <div class="script-line"><div class="script-time">5〜12秒</div><div class="script-text">「実は見積もりの◯割が中間マージンのことも」</div></div>
             <div class="script-line"><div class="script-time">12〜22秒</div><div class="script-text">自社職人が屋根で作業→「私たちは職人が直接施工します」</div></div>
             <div class="script-line"><div class="script-time">22〜30秒</div><div class="script-text">「だから無駄な費用なし。中京ルーフ　無料相談受付中」</div></div>
-          </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">クライアントOK / 修正点</div>
-                <textarea class="input-field" rows="2" placeholder=""></textarea>
-              </div>
-              <div class="input-row">
-                <div class="input-label">撮影場所・手配メモ</div>
-                <textarea class="input-field" rows="2" placeholder=""></textarea>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -341,19 +308,6 @@
             <div class="script-line"><div class="script-time">15〜30秒</div><div class="script-text">丁寧に屋根を調べる様子・お客様に説明するシーン</div></div>
             <div class="script-line"><div class="script-time">30〜45秒</div><div class="script-text">「知多半島で◯◯件。中京ルーフに無料でご相談を」</div></div>
           </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">施工件数（正確な数字を確認）</div>
-                <input type="text" class="input-field" placeholder="例：累計500件　など">
-              </div>
-              <div class="input-row">
-                <div class="input-label">クライアントOK / 修正点</div>
-                <textarea class="input-field" rows="2" placeholder=""></textarea>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -396,19 +350,6 @@
             <div class="script-line"><div class="script-time">3〜8秒</div><div class="script-text">「実は…この1ヶ月前はこんな状態でした」→Before画像</div></div>
             <div class="script-line"><div class="script-time">8〜20秒</div><div class="script-text">Before→After をリズムよく複数事例で見せる</div></div>
             <div class="script-line"><div class="script-time">20〜30秒</div><div class="script-text">「中京ルーフ　施工実績多数。まずは無料相談から」</div></div>
-          </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">使用可能なBefore/After写真の有無・数</div>
-                <textarea class="input-field" rows="2" placeholder="例：過去施工の写真◯件分あり、お客様許可取得済み　など"></textarea>
-              </div>
-              <div class="input-row">
-                <div class="input-label">ドローン撮影の可否</div>
-                <input type="text" class="input-field" placeholder="可 / 不可 / 要確認">
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -453,19 +394,6 @@
             <div class="script-line"><div class="script-time">15〜25秒</div><div class="script-text">「今のうちに無料点検で、台風に備えましょう」</div></div>
             <div class="script-line"><div class="script-time">25〜30秒</div><div class="script-text">「中京ルーフ　台風前無料点検キャンペーン実施中」</div></div>
           </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">キャンペーン期間・条件</div>
-                <input type="text" class="input-field" placeholder="例：6月1日〜8月31日　先着20件　など">
-              </div>
-              <div class="input-row">
-                <div class="input-label">クライアントOK / 修正点</div>
-                <textarea class="input-field" rows="2" placeholder=""></textarea>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -508,19 +436,6 @@
             <div class="script-line"><div class="script-time">8〜20秒</div><div class="script-text">「説明が丁寧で、無理な勧誘もなかった。安心しました」</div></div>
             <div class="script-line"><div class="script-time">20〜35秒</div><div class="script-text">きれいになった屋根をバックに笑顔のお客様</div></div>
             <div class="script-line"><div class="script-time">35〜45秒</div><div class="script-text">「中京ルーフ　地元密着・10年保証」</div></div>
-          </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">協力いただけるお客様候補（有無・人数）</div>
-                <textarea class="input-field" rows="2" placeholder="例：2〜3名に打診予定　など"></textarea>
-              </div>
-              <div class="input-row">
-                <div class="input-label">クライアントOK / 修正点</div>
-                <textarea class="input-field" rows="2" placeholder=""></textarea>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -568,23 +483,6 @@
             <div class="script-line"><div class="script-time">4〜10秒</div><div class="script-text">損傷した屋根・ずれた瓦・剥がれた板金の映像</div></div>
             <div class="script-line"><div class="script-time">10〜16秒</div><div class="script-text">「中京ルーフ　緊急点検受付中。お電話1本で伺います」</div></div>
             <div class="script-line"><div class="script-time">16〜20秒</div><div class="script-text">電話番号大きく表示・「今すぐ電話する」ボタン誘導</div></div>
-          </div>
-          <div class="input-section">
-            <div class="input-section-title">📝 記入欄（クライアントへの確認事項）</div>
-            <div class="input-fields">
-              <div class="input-row">
-                <div class="input-label">緊急対応の受付体制（営業時間・対応エリア）</div>
-                <textarea class="input-field" rows="2" placeholder="例：年中無休・知多半島全域対応　など"></textarea>
-              </div>
-              <div class="input-row">
-                <div class="input-label">緊急時の問い合わせ先（電話番号）</div>
-                <input type="text" class="input-field" placeholder="例：0562-XX-XXXX">
-              </div>
-              <div class="input-row">
-                <div class="input-label">事前に準備する広告セット・運用ルール</div>
-                <textarea class="input-field" rows="2" placeholder="例：台風警報発令翌日に自動配信OKかどうか　など"></textarea>
-              </div>
-            </div>
           </div>
         </div>
       </div>
